@@ -23,3 +23,13 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+ 
+    - name: dotnet publish
+      run: |
+        dotnet publish -c Release -o dotnetcorewebapp 
+    - name: 'Deploy to Azure WebApp'
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.CORETEST_SECRET}}
+        package: './dotnetcorewebapp'
