@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  AZURE_WEBAPP_NAME: netcore-webapp1    # set this to your application's name
+
 jobs:
   build:
 
